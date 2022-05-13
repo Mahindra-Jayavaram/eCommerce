@@ -3,17 +3,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { Rateing } from "./Rateing";
 import { Link } from "react-router-dom";
 import { getMensData } from "../Redux/Mens/action";
+import { getSortData } from "../Redux/Mens/action";
+
 
 export const Mens = () => {
   const dispatch = useDispatch();
   const { mens } = useSelector((state) => state.products);
   useEffect(() => {
     dispatch(getMensData());
-    console.log(mens);
   }, []);
+  const handleCostSort = (e)=>{
+    const {id,value} = e.target;
+    if(id === 'sortByCost' && value==='low'){
+        mens.sort((a,b)=>a.price_after-b.price_after);
+        console.log(mens);
+          dispatch(getSortData(mens));
+    }
+    if(id === 'sortByCost' && value==='high'){
+        mens.sort((a,b)=>b.price_after-a.price_after);
+        console.log(mens);
+        dispatch(getSortData(mens));
+    }
+}
 
   return (
     <>
+         <div id = "buttons" style={
+        {
+          display : "flex",
+          justifyContent : "space-evenly"
+        }
+      }>
+        <select name="" id="sortByCost" onChange={handleCostSort} style={{width:'20%',marginTop:'20px',height:"50px", border:'none', background:'rgb(63,81,181)', color:'#fff', borderRadius:'3px', fontSize:'14px',}}>
+          <option value="">  sort by cost  </option>
+          <option value="high">high to low</option>
+          <option value="low">low to high</option>
+        </select>
+      </div>
       <div>
         <div
           style={{

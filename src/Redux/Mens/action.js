@@ -21,3 +21,8 @@ export const getMensData = ()=>(dispatch) =>{
     .then((res)=>dispatch(getMens(res)))
     .catch(()=>dispatch(error()))
 }
+
+export const getSortData = (res) => (dispatch) =>{
+    dispatch(getMens(res))
+    console.log("res",res);
+}

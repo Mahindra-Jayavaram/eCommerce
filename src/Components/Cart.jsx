@@ -1,18 +1,27 @@
-import { useDispatch, useSelector } from "react-redux";
-import { REMOVE_ITEM } from "../Redux/CartPage/action";
+// import { useState } from "react";
+import { useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
+// import { ADD_TO_CART } from '../Redux/CartPage/action';
 import { Rateing } from "./Rateing";
 
 export const Cart = () => {
+  // const [deleteData, setDeleteData] = useState([])
   const { cart } = useSelector((store) => store.cart);
   console.log("cart:", cart);
 
-  const dispatch = useDispatch()
-  const handleRemove = ()=>{
-    console.log("removed")
-    dispatch({
-            type:REMOVE_ITEM,
-            // payload
-    })
+  // const dispatch = useDispatch()
+  
+  const handleRemove = (id)=>{
+  //   fetch(`http://localhost:1343/Data/${id.id}`, {
+  //     method: 'DELETE',
+  //   })
+  //   .then(res => res.json()) // or res.json()
+  //   .then(res => setDeleteData(res))
+  //   dispatch({
+  //     type:ADD_TO_CART,
+  //     payload : deleteData,
+  // })
+  console.log("removed")
   }
   return (
     <>
