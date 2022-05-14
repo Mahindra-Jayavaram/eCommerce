@@ -7,7 +7,7 @@ export const Home = ()=>{
 
     return (
         <>
-        <h1>Home page</h1>
+        <marquee behavior="" direction="right"><h1>Home page</h1></marquee>
         <NavCarousel/>
         <div style={{
             width:"80%",

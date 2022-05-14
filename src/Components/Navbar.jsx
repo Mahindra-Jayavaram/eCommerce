@@ -16,6 +16,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { Sidebar } from './Sidebar';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -89,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Navbar = ()=> {
+  const { cart } = useSelector((store) => store.cart)
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -189,7 +191,7 @@ export const Navbar = ()=> {
           <Link to = "/"  style={{color: "white", textDecoration: "none"}}><Typography className={classes.title} variant="h6" noWrap>
             Home Page
           </Typography></Link>
-          <div className={classes.search}>
+          <div className={classes.search} style={{width:"25%"}}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -204,7 +206,7 @@ export const Navbar = ()=> {
           </div>
           <div style={{
               width: "30%",
-              marginLeft : "20%"
+              marginLeft : "15%"
           }}>
           <Button variant="contained" color="primary" style={{marginRight : "4%",}}>
             Sign Up
@@ -216,8 +218,8 @@ export const Navbar = ()=> {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={0} color="secondary">
-                <ShoppingCartIcon />
+              <Badge badgeContent={cart.length} color="secondary">
+                <Link to = "/cart" style={{color: "white"}}><ShoppingCartIcon /></Link>
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">

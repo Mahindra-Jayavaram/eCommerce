@@ -1,28 +1,36 @@
-// import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 // import { useDispatch } from "react-redux";
 // import { ADD_TO_CART } from '../Redux/CartPage/action';
+import { useSelector } from "react-redux";
 import { Rateing } from "./Rateing";
+import { Link } from "react-router-dom";
 
 export const Cart = () => {
-  // const [deleteData, setDeleteData] = useState([])
+  const [newData, setNewData] = useState([])
   const { cart } = useSelector((store) => store.cart);
   console.log("cart:", cart);
 
   // const dispatch = useDispatch()
-  
+ 
   const handleRemove = (id)=>{
   //   fetch(`http://localhost:1343/Data/${id.id}`, {
   //     method: 'DELETE',
   //   })
   //   .then(res => res.json()) // or res.json()
-  //   .then(res => setDeleteData(res))
+  //   .then(res => setNewData(res))
   //   dispatch({
   //     type:ADD_TO_CART,
-  //     payload : deleteData,
+  //     payload : newData,
   // })
-  console.log("removed")
+  // console.log("removed")
+
+   let newCart = cart.filter((ele)=>ele.id !== id)
+   console.log("new",newCart)
+    setNewData(newCart)
+
+    console.log("newCart",newCart)
   }
+  console.log(newData, "newdata")
   return (
     <>
       <h1>Cart Page</h1>
@@ -45,7 +53,7 @@ export const Cart = () => {
               <p style={{ marginTop: "0px" }}> {e.price_after}</p>
             </div>
             <p>Discount:{e.offer}%</p>
-            <button
+            <Link to = "/payment"><button
               style={{
                 width: "30%",
                 padding: "4%",
@@ -57,7 +65,7 @@ export const Cart = () => {
               }}
             >
               BUY NOW
-            </button>
+            </button></Link>
             <button
               style={{
                 width: "30%",
@@ -69,7 +77,7 @@ export const Cart = () => {
                 fontSize: "14px",
                 marginLeft:"20px"
               }}
-              onClick = {handleRemove}
+              onClick = {()=>handleRemove(e.id)}
             >
               REMOVE
             </button>
