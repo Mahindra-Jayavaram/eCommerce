@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Textfeild } from './Textfeild';
+import { PaymentDetails } from "./PaymentDetails";
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,23 +23,72 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['Plese Add the Address', "Payment Details",'Check Out'];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return 'Select campaign settings...';
+      return (
+        <>
+        <div>
+          Enter your Dno: <Textfeild/>
+          Enter Landmark: <Textfeild/>
+          Enter Street: <Textfeild/>
+          Enter Area: <Textfeild/>
+          Enter District: <Textfeild/>
+          Enter Pincode: <Textfeild/>
+          Enter State: <Textfeild/>
+        </div>
+        </>
+      );
     case 1:
-      return 'What is an ad group anyways?';
+      return <PaymentDetails/>;
     case 2:
-      return 'This is the bit I really care about!';
+      return <>
+      <h1>Check Out Page</h1>
+      <input type="text" placeholder='   Enter the Card Number'  style={{
+        height:"40px",
+        width : "20%",
+        borderRadius: "10px",
+        marginTop:"20px",
+        padding:"5px"
+      }} /><br />
+      <input type="text" placeholder='   Name of the Card Holder'  style={{
+        height:"40px",
+        width : "20%",
+        borderRadius: "10px",
+        marginTop:"20px",
+        padding:"5px",
+
+      }} /><br/>
+      <div>
+        <input type="text" placeholder='   Expiary Date' style={{
+        height:"40px",
+        width : "20%",
+        borderRadius: "10px",
+        marginTop:"20px",
+        padding:"5px"
+
+      }} /><br/>
+        <input type="text" placeholder='   CVV' minLength={3} style={{
+        height:"40px",
+        width : "20%",
+        borderRadius: "10px",
+        marginTop:"20px",
+        padding:"5px"
+
+      }} /><br/>
+      </div>
+      </>;
     default:
       return 'Unknown step';
   }
 }
 
 export const PaymentNav = () => {
+  const navigate = useNavigate()
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -83,7 +135,9 @@ export const PaymentNav = () => {
   const handleReset = () => {
     setActiveStep(0);
   };
-
+  const handleShopping= ()=>{
+      navigate("/")
+  }
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep}>
@@ -91,7 +145,7 @@ export const PaymentNav = () => {
           const stepProps = {};
           const labelProps = {};
           if (isStepOptional(index)) {
-            labelProps.optional = <Typography variant="caption">Optional</Typography>;
+            labelProps.optional = <Typography variant="caption"></Typography>;
           }
           if (isStepSkipped(index)) {
             stepProps.completed = false;
@@ -107,10 +161,13 @@ export const PaymentNav = () => {
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
+              Order has been Successfully Placed
             </Typography>
             <Button onClick={handleReset} className={classes.button}>
               Reset
+            </Button>
+            <Button onClick={handleShopping} className={classes.button}>
+              Continue Shopping...
             </Button>
           </div>
         ) : (

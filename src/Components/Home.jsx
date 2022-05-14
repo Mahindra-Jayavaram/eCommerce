@@ -7,7 +7,7 @@ export const Home = ()=>{
 
     return (
         <>
-        <marquee behavior="" direction="right"><h1>Home page</h1></marquee>
+        <marquee style={{width:"30%",margin:"auto"}}><h1>Home page</h1></marquee>
         <NavCarousel/>
         <div style={{
             width:"80%",

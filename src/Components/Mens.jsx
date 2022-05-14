@@ -31,7 +31,8 @@ export const Mens = () => {
          <div id = "buttons" style={
         {
           display : "flex",
-          justifyContent : "space-evenly"
+          justifyContent : "space-evenly",
+          padding:"10px"
         }
       }>
         <select name="" id="sortByCost" onChange={handleCostSort} style={{width:'20%',marginTop:'20px',height:"50px", border:'none', background:'rgb(63,81,181)', color:'#fff', borderRadius:'3px', fontSize:'14px',}}>
